@@ -1,4 +1,4 @@
-import { createContext, memo, useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { faker } from "@faker-js/faker";
 import { PostProvider, usePosts } from "./PostContext";
 
@@ -13,8 +13,6 @@ function App() {
   // Whenever `isFakeDark` changes, we toggle the `fake-dark-mode` class on the HTML element (see in "Elements" dev tool).
   const [isFakeDark, setIsFakeDark] = useState(false);
 
-  const PostContext = createContext();
-
   useEffect(
     function () {
       document.documentElement.classList.toggle("fake-dark-mode");
@@ -23,26 +21,21 @@ function App() {
   );
 
   return (
-    <PostContext.Provider value={{
-      posts: SearchPosts,
-      
-    }}>
-      <section>
-        <button
-          onClick={() => setIsFakeDark((isFakeDark) => !isFakeDark)}
-          className="btn-fake-dark-mode"
-        >
-          {isFakeDark ? "☀️" : "🌙"}
-        </button>
+    <section>
+      <button
+        onClick={() => setIsFakeDark((isFakeDark) => !isFakeDark)}
+        className="btn-fake-dark-mode"
+      >
+        {isFakeDark ? "☀️" : "🌙"}
+      </button>
 
-        <PostProvider>
-          <Header />
-          <Main />
-          <Archive />
-          <Footer />
-        </PostProvider>
-      </section>
-    </PostContext.Provider>
+      <PostProvider>
+        <Header />
+        <Main />
+        <Archive />
+        <Footer />
+      </PostProvider>
+    </section>
   );
 }
 
